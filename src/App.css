@@ -42,6 +42,7 @@ html {
   white-space: -o-pre-wrap; /* Opera 7 */
   white-space: pre-wrap;
   word-wrap: break-word;
+  overflow-wrap: break-word;
   -webkit-box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.2);
@@ -53,25 +54,35 @@ html {
   margin: 5px 0 10px 15px;
   height: 3vh;
 }
+.rad-deg {
+  color: var(--mdBlue);
+  position: absolute;
+  left: 35px;
+  top: 10px;
+}
 .input-display {
   color: #000a6c;
   width: 100%;
   height: 20vh;
-  font-size: 30px;
+  font-size: 35px;
   text-align: right;
   padding: 15px;
   margin-bottom: 0;
   overflow: hidden;
+  line-height: 1.3em;
+  transition: all 0.5s ease-out;
 }
 
 .answer-display {
   color: #0d3ba5;
   width: 100%;
   height: 10vh;
-  font-size: 25px;
+  font-size: 30px;
   padding: 15px;
   margin-top: 0;
   text-align: right;
+  overflow: hidden;
+  transition: all 0.5s ease-out;
 }
 .calculator-keypad {
   height: 60vh;
@@ -101,12 +112,21 @@ html {
   padding: 0;
   margin: 0;
   border: none;
+  border-radius: 100%;
   outline: none;
   text-align: center;
   background-color: transparent;
   font-size: 2em;
   color: #000a6c;
 }
+.number-pad > button:hover {
+  background-color: #b2dbe8;
+}
+.number-pad > button:active {
+  color: var(--mainWhite);
+  background-color: var(--dkBlue);
+}
+
 .operators {
   background-color: #000a6c;
   padding: 0;
@@ -120,8 +140,15 @@ html {
   background-color: transparent;
   color: var(--mainWhite);
   cursor: pointer;
+  border-radius: 100%;
 }
-
+.operators > button:hover {
+  background-color: #0019ff;
+}
+.operators > button:active {
+  color: #000a6c;
+  background-color: #b1bace;
+}
 .extra-operators {
   display: flex;
   flex-wrap: wrap;
@@ -148,6 +175,14 @@ html {
   font-size: 1em;
   color: #000a6c;
   background-color: transparent;
+  border-radius: 100%;
+}
+.extra-operators > button:hover {
+  background-color: #f79c6f;
+}
+.extra-operators > button:active {
+  color: var(--mainWhite);
+  background-color: var(--dkBlue);
 }
 .drag-sym {
   position: absolute;

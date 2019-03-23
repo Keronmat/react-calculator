@@ -12,13 +12,13 @@ const MainOperators = props => {
         <FontAwesomeIcon icon={faBackspace} />
       </button>
       <button
-        name="*"
+        name="x"
         onClick={e => props.toggleOperator(e.currentTarget.name)}
       >
         &#215;
       </button>
       <button
-        name="/"
+        name="÷"
         onClick={e => props.toggleOperator(e.currentTarget.name)}
       >
         &#247;

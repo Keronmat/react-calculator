@@ -27,20 +27,78 @@ export default class SideDrawer extends Component {
         </button>
 
         <button>INV</button>
-        <button>DEG</button>
-        <button>&#37;</button>
-        <button>sin</button>
-        <button>cos</button>
-        <button>tan</button>
-        <button>In</button>
-        <button>log</button>
-        <button>!</button>
-        <button> &pi;</button>
-        <button>e</button>
-        <button>&#8963;</button>
-        <button>&#8317;</button>
-        <button>&#8318;</button>
-        <button>&#8730;</button>
+        <button onClick={() => this.props.handleRadorDeg}>
+          {this.props.isRadoRdeg ? "RAD" : "DEG"}
+        </button>
+        <button
+          value="%"
+          onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
+        >
+          &#37;
+        </button>
+        <button
+          value="sin("
+          onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
+        >
+          sin
+        </button>
+        <button
+          value="cos("
+          onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
+        >
+          cos
+        </button>
+        <button
+          value="tan("
+          onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
+        >
+          tan
+        </button>
+        <button
+          value="In"
+          onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
+        >
+          In
+        </button>
+        <button
+          value="log("
+          onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
+        >
+          log
+        </button>
+        <button
+          value="!"
+          onClick={e => this.props.handleSideOperators(e.target.value)}
+        >
+          !
+        </button>
+        <button
+          value="π"
+          onClick={e => this.props.handleSideOperators(e.target.value)}
+        >
+          &pi;
+        </button>
+        <button value="e" onClick={e => this.props.handleClick(e.target.value)}>
+          e
+        </button>
+        <button value="^" onClick={e => this.props.handleClick(e.target.value)}>
+          &#8963;
+        </button>
+        <button
+          value="("
+          onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
+        >
+          &#8317;
+        </button>
+        <button
+          value=")"
+          onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
+        >
+          &#8318;
+        </button>
+        <button value="√" onClick={e => this.props.handleClick(e.target.value)}>
+          &#8730;
+        </button>
       </div>
     );
   }
