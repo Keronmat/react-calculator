@@ -10,7 +10,7 @@ export default function Display(props) {
       : { overflow: "hidden" };*/
   return (
     <div className="calculator-display col-sm-12 ">
-      <Menu isRadoRdeg={props.isRadoRdeg} />
+      <Menu deg={props.deg} />
       <InputDisplay displayInput={props.displayInput} />
       <AnswerDisplay displayResult={props.displayResult} />
     </div>

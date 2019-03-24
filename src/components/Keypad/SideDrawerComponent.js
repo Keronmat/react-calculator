@@ -17,6 +17,7 @@ export default class SideDrawer extends Component {
   };
 
   render() {
+    const invStyle = { backgroundColor: "#f79c6f", borderRadius: "5%" };
     return (
       <div
         className="extra-operators"
@@ -26,9 +27,14 @@ export default class SideDrawer extends Component {
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
 
-        <button>INV</button>
-        <button onClick={() => this.props.handleRadorDeg}>
-          {this.props.isRadoRdeg ? "RAD" : "DEG"}
+        <button
+          style={this.props.inv ? invStyle : null}
+          onClick={() => this.props.handleInv()}
+        >
+          INV
+        </button>
+        <button onClick={() => this.props.handleRadorDeg()}>
+          {this.props.deg ? "RAD" : "DEG"}
         </button>
         <button
           value="%"

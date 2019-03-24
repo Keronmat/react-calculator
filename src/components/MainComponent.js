@@ -11,7 +11,8 @@ export default class Main extends Component {
       displayResult: "",
       operatorInUse: null,
       sideOperators: null,
-      isRadoRdeg: false
+      deg: false,
+      inv: false
     };
   }
 
@@ -92,7 +93,6 @@ export default class Main extends Component {
     const { displayInput, operatorInUse, sideOperators } = this.state;
     //const lastOper = displayInput.charAt(displayInput.length - 1);
     const prevOp = operatorInUse;
-    const prevSideOp = sideOperators;
     const prevDisplay = displayInput;
 
     if (operatorInUse) {
@@ -134,21 +134,27 @@ export default class Main extends Component {
     let x = newInput.slice(4);
 
     if (this.state.sideOperators === "sin(") {
-      let result = this.calculate(Math.sin(x));
+      let result = this.state.deg
+        ? this.calculate(Math.sin((x * Math.PI) / 180))
+        : this.calculate(Math.sin(x));
       this.setState({
         displayInput: newInput,
         displayResult: result,
         sideOperators: null
       });
     } else if (this.state.sideOperators === "cos(") {
-      let result = this.calculate(Math.cos(x));
+      let result = this.state.deg
+        ? this.calculate(Math.cos((x * Math.PI) / 180))
+        : this.calculate(Math.cos(x));
       this.setState({
         displayInput: newInput,
         displayResult: result,
         sideOperators: null
       });
     } else if (this.state.sideOperators === "tan(") {
-      let result = this.calculate(Math.tan(x));
+      let result = this.state.deg
+        ? this.calculate(Math.tan((x * Math.PI) / 180))
+        : this.calculate(Math.tan(x));
       this.setState({
         displayInput: newInput,
         displayResult: result,
@@ -227,7 +233,9 @@ export default class Main extends Component {
       case "sin(":
         if (newInput >= 1) {
           display = `${oper}${newInput}`;
-          result = this.calculate(Math.sin(newInput));
+          result = this.state.deg
+            ? this.calculate(Math.sin((newInput * Math.PI) / 180))
+            : this.calculate(Math.sin(newInput));
         } else if (this.state.displayResult !== undefined) {
           display = `${oper}${newInput}`;
           result = "";
@@ -241,7 +249,9 @@ export default class Main extends Component {
       case "cos(":
         if (newInput >= 1) {
           display = `${oper}${newInput}`;
-          result = this.calculate(Math.cos(newInput));
+          result = this.state.deg
+            ? this.calculate(Math.cos((newInput * Math.PI) / 180))
+            : this.calculate(Math.cos(newInput));
         } else if (this.state.displayResult !== undefined) {
           display = `${oper}${newInput}`;
           result = "";
@@ -255,7 +265,9 @@ export default class Main extends Component {
       case "tan(":
         if (newInput >= 1) {
           display = `${oper}${newInput}`;
-          result = this.calculate(Math.tan(newInput));
+          result = this.state.deg
+            ? this.calculate(Math.tan((newInput * Math.PI) / 180))
+            : this.calculate(Math.tan(newInput));
         } else if (this.state.displayResult !== undefined) {
           display = `${oper}${newInput}`;
           result = "";
@@ -414,8 +426,15 @@ export default class Main extends Component {
   };
 
   handleRadorDeg = () => {
-    this.setState({ isRadoRdeg: !this.state.isRadoRdeg });
-    console.log(this.state.isRadoRdeg);
+    this.setState({ deg: !this.state.deg }, function() {
+      console.log(this.state.deg);
+    });
+  };
+
+  handleInv = () => {
+    this.setState({ inv: !this.state.inv }, function() {
+      console.log(this.state.inv);
+    });
   };
 
   render() {
@@ -424,7 +443,7 @@ export default class Main extends Component {
         <Display
           displayInput={this.state.displayInput}
           displayResult={this.state.displayResult}
-          isRadoRdeg={this.state.isRadoRdeg}
+          deg={this.state.deg}
         />
         <Keypad
           toggleOperator={this.toggleOperator}
@@ -435,7 +454,9 @@ export default class Main extends Component {
           handleDot={this.handleDot}
           handleSideDrawerKeys={this.handleSideDrawerKeys}
           handleRadorDeg={this.handleRadorDeg}
-          isRadoRdeg={this.state.isRadoRdeg}
+          deg={this.state.deg}
+          inv={this.state.inv}
+          handleInv={this.state.handleInv}
         />
       </div>
     );
