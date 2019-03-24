@@ -55,10 +55,10 @@ export default class SideDrawer extends Component {
           tan
         </button>
         <button
-          value="In"
+          value="ln("
           onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
         >
-          In
+          ln
         </button>
         <button
           value="log("
@@ -68,20 +68,26 @@ export default class SideDrawer extends Component {
         </button>
         <button
           value="!"
-          onClick={e => this.props.handleSideOperators(e.target.value)}
+          onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
         >
           !
         </button>
         <button
           value="π"
-          onClick={e => this.props.handleSideOperators(e.target.value)}
+          onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
         >
           &pi;
         </button>
-        <button value="e" onClick={e => this.props.handleClick(e.target.value)}>
+        <button
+          value="e"
+          onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
+        >
           e
         </button>
-        <button value="^" onClick={e => this.props.handleClick(e.target.value)}>
+        <button
+          value="^"
+          onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
+        >
           &#8963;
         </button>
         <button
@@ -96,7 +102,10 @@ export default class SideDrawer extends Component {
         >
           &#8318;
         </button>
-        <button value="√" onClick={e => this.props.handleClick(e.target.value)}>
+        <button
+          value="√"
+          onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
+        >
           &#8730;
         </button>
       </div>
