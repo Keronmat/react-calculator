@@ -27,11 +27,10 @@ export default function Keypad(props) {
           <SideDrawer
             handleClick={props.handleClick}
             handleSideDrawerKeys={props.handleSideDrawerKeys}
-            handleSideOperators={props.handleSideOperators}
             handleRadorDeg={props.handleRadorDeg}
             deg={props.deg}
-            inv={props.inv}
-            handleInv={props.handleInv}
+            inverse={props.inverse}
+            toggleInverse={props.toggleInverse}
           />
         </React.Fragment>
       </div>

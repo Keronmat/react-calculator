@@ -17,7 +17,14 @@ export default class SideDrawer extends Component {
   };
 
   render() {
-    const invStyle = { backgroundColor: "#f79c6f", borderRadius: "5%" };
+    const invStyle = {
+      backgroundColor: "#f79c6f",
+      borderBottomLeftRadius: 10,
+      borderBottomRightRadius: 10,
+      borderTopRightRadius: 10,
+      borderTopLeftRadius: 10
+    };
+    const fontInverseStyle = { fontWeight: 600 };
     return (
       <div
         className="extra-operators"
@@ -28,8 +35,8 @@ export default class SideDrawer extends Component {
         </button>
 
         <button
-          style={this.props.inv ? invStyle : null}
-          onClick={() => this.props.handleInv()}
+          style={this.props.inverse ? invStyle : null}
+          onClick={() => this.props.toggleInverse()}
         >
           INV
         </button>
@@ -43,34 +50,41 @@ export default class SideDrawer extends Component {
           &#37;
         </button>
         <button
-          value="sin("
+          style={this.props.inverse ? fontInverseStyle : null}
+          value={this.props.inverse ? "sin⁻¹(" : "sin("}
           onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
         >
-          sin
+          {this.props.inverse ? "sin⁻¹" : "sin"}
         </button>
+
         <button
-          value="cos("
+          style={this.props.inverse ? fontInverseStyle : null}
+          value={this.props.inverse ? "cos⁻¹(" : "cos("}
           onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
         >
-          cos
+          {this.props.inverse ? "cos⁻¹" : "cos"}
         </button>
         <button
           value="tan("
+          style={this.props.inverse ? fontInverseStyle : null}
+          value={this.props.inverse ? "tan⁻¹(" : "tan("}
           onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
         >
-          tan
+          {this.props.inverse ? "tan⁻¹" : "tan"}
         </button>
         <button
-          value="ln("
+          value={this.props.inverse ? "eˣ" : "ln("}
+          style={this.props.inverse ? fontInverseStyle : null}
           onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
         >
-          ln
+          {this.props.inverse ? "eˣ" : "ln"}
         </button>
         <button
-          value="log("
+          value={this.props.inverse ? "10ˣ" : "log("}
+          style={this.props.inverse ? fontInverseStyle : null}
           onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
         >
-          log
+          {this.props.inverse ? "10ˣ" : "log"}
         </button>
         <button
           value="!"
@@ -109,10 +123,11 @@ export default class SideDrawer extends Component {
           &#8318;
         </button>
         <button
-          value="√"
+          value={this.props.inverse ? "X²" : "√"}
+          style={this.props.inverse ? fontInverseStyle : null}
           onClick={e => this.props.handleSideDrawerKeys(e.target.value)}
         >
-          &#8730;
+          {this.props.inverse ? <>&#215;&#178;</> : <>&#8730;</>}
         </button>
       </div>
     );

@@ -12,7 +12,7 @@ export default class Main extends Component {
       operatorInUse: null,
       sideOperators: null,
       deg: false,
-      inv: false
+      inverse: true
     };
   }
 
@@ -132,11 +132,20 @@ export default class Main extends Component {
     let newInput = this.state.displayInput + value;
 
     let x = newInput.slice(4);
-
+    let i = newInput.slice(6);
     if (this.state.sideOperators === "sin(") {
       let result = this.state.deg
         ? this.calculate(Math.sin((x * Math.PI) / 180))
         : this.calculate(Math.sin(x));
+      this.setState({
+        displayInput: newInput,
+        displayResult: result,
+        sideOperators: null
+      });
+    } else if (this.state.sideOperators === "sin⁻¹(") {
+      let result = this.state.deg
+        ? this.calculate(Math.asin((i * Math.PI) / 180))
+        : this.calculate(Math.asin(i));
       this.setState({
         displayInput: newInput,
         displayResult: result,
@@ -245,6 +254,27 @@ export default class Main extends Component {
           displayResult: result,
           sideOperators: oper
         });
+        break;
+      case "sin⁻¹(":
+        if (newInput >= 1) {
+          display = `${oper}${newInput}`;
+          result = this.state.deg
+            ? this.calculate(Math.asin((newInput * Math.PI) / 180))
+            : this.calculate(Math.asin(newInput));
+        } else if (this.state.displayResult !== undefined) {
+          display = `${oper}${newInput}`;
+          result = "";
+        }
+        this.setState(
+          {
+            displayInput: display,
+            displayResult: result,
+            sideOperators: oper
+          },
+          function() {
+            console.log(oper, display, newInput);
+          }
+        );
         break;
       case "cos(":
         if (newInput >= 1) {
@@ -431,12 +461,11 @@ export default class Main extends Component {
     });
   };
 
-  handleInv = () => {
-    this.setState({ inv: !this.state.inv }, function() {
-      console.log(this.state.inv);
+  toggleInverse = () => {
+    this.setState({ inverse: !this.state.inverse }, function() {
+      console.log(this.state.inverse);
     });
   };
-
   render() {
     return (
       <div className="calculator">
@@ -455,8 +484,8 @@ export default class Main extends Component {
           handleSideDrawerKeys={this.handleSideDrawerKeys}
           handleRadorDeg={this.handleRadorDeg}
           deg={this.state.deg}
-          inv={this.state.inv}
-          handleInv={this.state.handleInv}
+          inverse={this.state.inverse}
+          toggleInverse={this.toggleInverse}
         />
       </div>
     );
