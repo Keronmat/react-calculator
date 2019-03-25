@@ -12,39 +12,70 @@ export default class Main extends Component {
       operatorInUse: null,
       sideOperators: null,
       deg: false,
-      inverse: true
+      inverse: false,
+      history: []
     };
   }
 
   calculate = input => {
-    // if (input === undefined || input === null) return;
-    console.log(input);
-    // eslint-disable-next-line
-    return eval(input);
+    if (input !== "") {
+      try {
+        // eslint-disable-next-line
+        let result = eval(input);
+
+        if (isNaN(result)) {
+          return;
+        } else {
+          this.setState(
+            {
+              displayResult: result.toString()
+            },
+            function() {
+              console.log(this.state.history);
+            }
+          );
+        }
+      } catch (e) {
+        this.setState({
+          displayResult: `Bad Expression`
+        });
+      }
+    }
   };
 
   handleClick = value => {
-    this.toggleOperator();
+    // this.toggleOperator();
 
     if (value === "=") {
+      let result = this.calculate(this.state.displayResult);
       this.setState({
         displayInput: this.state.displayResult,
-        displayResult: "",
-        operatorInUse: null
+        displayResult: result,
+        operatorInUse: null,
+        sideOperators: null
       });
+      this.addToHistory(this.state.displayInput, this.state.displayResult);
     } else if (this.state.operatorInUse !== null) {
       let newInput = this.state.displayInput + value;
       let replace = newInput
         .replace(/x/g, "*")
         .replace(/÷/g, "/")
         .replace(/e/g, "Math.E")
-        .replace(/π/g, "Math.PI");
+        .replace(/π/g, "Math.PI")
+        .replace(/sin\(/g, "Math.sin(")
+        .replace(/cos\(/g, "Math.cos(")
+        .replace(/tan\(/g, "Math.tan(")
+        .replace(/log\(/g, "Math.log10(")
+        .replace(/ln\(/g, "Math.log(")
+        .replace(/sin⁻¹\(/g, "Math.asin(")
+        .replace(/cos⁻¹\(/g, "Math.acos(")
+        .replace(/tan⁻¹\(/g, "Math.atan(");
       // eslint-disable-next-line
-      let result = this.calculate(replace);
+
+      this.calculate(replace);
 
       this.setState({
         displayInput: newInput,
-        displayResult: result,
         operatorInUse: null
       });
     } else if (this.state.sideOperators !== null) {
@@ -62,7 +93,7 @@ export default class Main extends Component {
     const display =
       displayInput > 0
         ? displayInput.substring(0, displayInput.length - 1)
-        : "";
+        : null;
     this.setState({
       displayInput: display
     });
@@ -109,7 +140,7 @@ export default class Main extends Component {
           }
         );
       }
-    } else if (sideOperators) {
+    } /* else if (sideOperators) {
       let x = prevDisplay.slice(0, -1);
       this.setState(
         () => ({
@@ -120,7 +151,7 @@ export default class Main extends Component {
           console.log(this.state);
         }
       );
-    } else {
+    } */ else {
       this.setState(() => ({
         operatorInUse: newOperator,
         displayInput: displayInput + newOperator
@@ -154,149 +185,116 @@ export default class Main extends Component {
   };*/
   handleSideFunctions = value => {
     let newInput = this.state.displayInput + value;
-
     let x = newInput.slice(4);
     let i = newInput.slice(6);
     if (this.state.sideOperators === "sin(") {
-      let result = this.state.deg
-        ? this.calculate(Math.sin((x * Math.PI) / 180))
-        : this.calculate(Math.sin(x));
+      let result = this.state.deg ? Math.sin((x * Math.PI) / 180) : Math.sin(x);
+      this.calculate(result);
       this.setState({
-        displayInput: newInput,
-        displayResult: result,
-        sideOperators: null
+        displayInput: newInput
       });
     } else if (this.state.sideOperators === "sin⁻¹(") {
       let result = this.state.deg
-        ? this.calculate(Math.asin((i * Math.PI) / 180))
-        : this.calculate(Math.asin(i));
-      this.setState({
-        displayInput: newInput,
-        displayResult: result,
-        sideOperators: null
-      });
+        ? Math.asin((i * Math.PI) / 180)
+        : Math.asin(i);
+      this.calculate(result);
+      this.setState(
+        {
+          displayInput: newInput
+        },
+        function() {
+          console.log(i, value, this.state.sideOperators);
+        }
+      );
     } else if (this.state.sideOperators === "cos(") {
-      let result = this.state.deg
-        ? this.calculate(Math.cos((x * Math.PI) / 180))
-        : this.calculate(Math.cos(x));
+      let result = this.state.deg ? Math.cos((x * Math.PI) / 180) : Math.cos(x);
+      this.calculate(result);
       this.setState({
-        displayInput: newInput,
-        displayResult: result,
-        sideOperators: null
+        displayInput: newInput
       });
     } else if (this.state.sideOperators === "cos⁻¹(") {
       let result = this.state.deg
-        ? this.calculate(Math.acos((i * Math.PI) / 180))
-        : this.calculate(Math.acos(i));
+        ? Math.acos((i * Math.PI) / 180)
+        : Math.acos(i);
+      this.calculate(result);
       this.setState({
-        displayInput: newInput,
-        displayResult: result,
-        sideOperators: null
+        displayInput: newInput
       });
     } else if (this.state.sideOperators === "tan(") {
-      let result = this.state.deg
-        ? this.calculate(Math.tan((x * Math.PI) / 180))
-        : this.calculate(Math.tan(x));
+      let result = this.state.deg ? Math.tan((x * Math.PI) / 180) : Math.tan(x);
+      this.calculate(result);
       this.setState({
-        displayInput: newInput,
-        displayResult: result,
-        sideOperators: null
+        displayInput: newInput
       });
     } else if (this.state.sideOperators === "tan⁻¹(") {
       let result = this.state.deg
-        ? this.calculate(Math.atan((i * Math.PI) / 180))
-        : this.calculate(Math.atan(i));
+        ? Math.atan((i * Math.PI) / 180)
+        : Math.atan(i);
+      this.calculate(result);
       this.setState({
-        displayInput: newInput,
-        displayResult: result,
-        sideOperators: null
+        displayInput: newInput
       });
     } else if (this.state.sideOperators === "log(") {
-      let result = this.calculate(Math.log10(x));
+      let result = Math.log10(x);
+      this.calculate(result);
       this.setState({
-        displayInput: newInput,
-        displayResult: result,
-        sideOperators: null
+        displayInput: newInput
       });
     } else if (this.state.sideOperators === "exp(") {
-      let result = this.calculate(Math.exp(x));
+      let result = Math.exp(x);
+      this.calculate(result);
       this.setState({
-        displayInput: newInput,
-        displayResult: result,
-        sideOperators: null
+        displayInput: newInput
       });
     } else if (this.state.sideOperators === "ln(") {
       let y = newInput.slice(3);
-      let result = this.calculate(Math.log(y));
+      let result = Math.log10(y);
+      this.calculate(result);
       this.setState({
-        displayInput: newInput,
-        displayResult: result,
-        sideOperators: null
+        displayInput: newInput
       });
     } else if (this.state.sideOperators === "!") {
       this.setState({
-        displayInput: newInput,
-        sideOperators: null
+        displayInput: newInput
       });
     } else if (this.state.sideOperators === "e") {
       this.setState({
-        displayInput: newInput,
-        sideOperators: null
+        displayInput: newInput
       });
     } else if (this.state.sideOperators === "π") {
       this.setState({
-        displayInput: newInput,
-        sideOperators: null
+        displayInput: newInput
       });
     } else if (this.state.sideOperators === "^") {
       let base = newInput.slice(0, newInput.indexOf("^"));
       let exponent = newInput.slice(newInput.indexOf("^") + 1);
       let display = newInput + value;
-      let result = this.calculate(`Math.pow(${base}, ${exponent})`);
-      console.log(newInput);
-      this.setState(
-        {
-          displayInput: display,
-          displayResult: result,
-          sideOperators: null
-        },
-        function() {
-          console.log(base, exponent, this.state.sideOperators);
-        }
-      );
+      let result = `Math.pow(${base}, ${exponent})`;
+      this.calculate(result);
+      this.setState({
+        displayInput: display
+      });
     } else if (this.state.sideOperators === "10^") {
       let exponent = newInput.slice(newInput.indexOf("^") + 1);
       let display = newInput + value;
-      let result = this.calculate(`Math.pow(${10}, ${exponent})`);
-      console.log(newInput);
-      this.setState(
-        {
-          displayInput: display,
-          displayResult: result,
-          sideOperators: null
-        },
-        function() {
-          console.log(exponent, this.state.sideOperators);
-        }
-      );
+      let result = `Math.pow(${10}, ${exponent})`;
+      this.calculate(result);
+
+      this.setState({
+        displayInput: display
+      });
     } else if (this.state.sideOperators === "√") {
       let y = newInput.slice(1);
-      let result = this.calculate(Math.sqrt(y));
-      this.setState(
-        {
-          displayInput: newInput,
-          displayResult: result,
-          sideOperators: null
-        },
-        function() {
-          console.log();
-        }
-      );
+      let result = Math.sqrt(y);
+      this.calculate(result);
+      this.setState({
+        displayInput: newInput
+      });
     }
   };
+
   handleSideDrawerKeys = oper => {
     const newInput = this.state.displayInput;
-    //const errorText = <p style={{ color: "red" }}>"Syntax Error"</p>;
 
     let result;
     let display;
@@ -307,15 +305,15 @@ export default class Main extends Component {
         if (newInput) {
           display = `${oper}${newInput}`;
           result = this.state.deg
-            ? this.calculate(Math.sin((newInput * Math.PI) / 180))
-            : this.calculate(Math.sin(newInput));
+            ? Math.sin((newInput * Math.PI) / 180)
+            : Math.sin(newInput);
         } else if (this.state.displayResult !== undefined) {
-          display = `${oper}${newInput}`;
+          display = `${newInput}${oper}`;
           result = "";
         }
+        this.calculate(result);
         this.setState({
           displayInput: display,
-          displayResult: result,
           sideOperators: oper
         });
         break;
@@ -323,143 +321,135 @@ export default class Main extends Component {
         if (newInput) {
           display = `${oper}${newInput}`;
           result = this.state.deg
-            ? this.calculate(Math.asin((newInput * Math.PI) / 180))
-            : this.calculate(Math.asin(newInput));
+            ? Math.asin((newInput * Math.PI) / 180)
+            : Math.asin(newInput);
         } else if (this.state.displayResult !== undefined) {
           display = `${oper}${newInput}`;
           result = "";
         }
-        this.setState(
-          {
-            displayInput: display,
-            displayResult: result,
-            sideOperators: oper
-          },
-          function() {
-            console.log(oper, display, newInput);
-          }
-        );
+        this.calculate(result);
+        this.setState({
+          displayInput: display,
+          sideOperators: oper
+        });
         break;
       case "cos(":
         if (newInput) {
           display = `${oper}${newInput}`;
           result = this.state.deg
-            ? this.calculate(Math.cos((newInput * Math.PI) / 180))
-            : this.calculate(Math.cos(newInput));
+            ? Math.cos((newInput * Math.PI) / 180)
+            : Math.cos(newInput);
         } else if (this.state.displayResult !== undefined) {
           display = `${oper}${newInput}`;
           result = "";
         }
         this.setState({
           displayInput: display,
-          displayResult: result,
           sideOperators: oper
         });
+        this.calculate(result);
         break;
       case "cos⁻¹(":
         if (newInput) {
           display = `${oper}${newInput}`;
           result = this.state.deg
-            ? this.calculate(Math.acos((newInput * Math.PI) / 180))
-            : this.calculate(Math.acos(newInput));
+            ? Math.acos((newInput * Math.PI) / 180)
+            : Math.acos(newInput);
         } else if (this.state.displayResult !== undefined) {
           display = `${oper}${newInput}`;
           result = "";
         }
         this.setState({
           displayInput: display,
-          displayResult: result,
           sideOperators: oper
         });
+        this.calculate(result);
         break;
       case "tan(":
         if (newInput) {
           display = `${oper}${newInput}`;
           result = this.state.deg
-            ? this.calculate(Math.tan((newInput * Math.PI) / 180))
-            : this.calculate(Math.tan(newInput));
+            ? Math.tan((newInput * Math.PI) / 180)
+            : Math.tan(newInput);
         } else if (this.state.displayResult !== undefined) {
           display = `${oper}${newInput}`;
           result = "";
         }
         this.setState({
           displayInput: display,
-          displayResult: result,
           sideOperators: oper
         });
+        this.calculate(result);
         break;
       case "tan⁻¹(":
         if (newInput) {
           display = `${oper}${newInput}`;
           result = this.state.deg
-            ? this.calculate(Math.atan((newInput * Math.PI) / 180))
-            : this.calculate(Math.atan(newInput));
+            ? Math.atan((newInput * Math.PI) / 180)
+            : Math.atan(newInput);
         } else if (this.state.displayResult !== undefined) {
           display = `${oper}${newInput}`;
           result = "";
         }
         this.setState({
           displayInput: display,
-          displayResult: result,
           sideOperators: oper
         });
+        this.calculate(result);
         break;
       case "log(":
         if (newInput) {
           display = `${oper}${newInput}`;
-          result = this.calculate(Math.log10(newInput));
+          result = Math.log10(newInput);
         } else if (this.state.displayResult !== undefined) {
           display = `${oper}${newInput}`;
           result = "";
         }
         this.setState({
           displayInput: display,
-          displayResult: result,
           sideOperators: oper
         });
+        this.calculate(result);
         break;
+
       case "exp(":
         if (newInput) {
           display = `${oper}${newInput}`;
-          result = this.calculate(Math.exp(newInput));
+          result = Math.exp(newInput);
         } else if (this.state.displayResult !== undefined) {
           display = `${oper}${newInput}`;
           result = "";
         }
         this.setState({
           displayInput: display,
-          displayResult: result,
           sideOperators: oper
         });
+        this.calculate(result);
         break;
       case "ln(":
         if (newInput) {
           display = `${oper}${newInput}`;
-          result = this.calculate(Math.log(newInput));
+          result = Math.log(newInput);
         } else if (this.state.displayResult !== undefined) {
           display = `${oper}${newInput}`;
           result = "";
         }
         this.setState({
           displayInput: display,
-          displayResult: result,
           sideOperators: oper
         });
+        this.calculate(result);
         break;
       case "e":
         display = newInput + oper;
-        result = this.calculate(Math.E);
+        result = Math.E;
 
-        this.setState(
-          {
-            displayInput: display,
-            displayResult: result,
-            sideOperators: oper
-          },
-          function() {
-            console.log(result);
-          }
-        );
+        this.setState({
+          displayInput: display,
+          displayResult: result,
+          sideOperators: oper
+        });
+        this.calculate(result);
         break;
 
       case "(":
@@ -478,85 +468,86 @@ export default class Main extends Component {
         break;
       case "π":
         display = newInput + oper;
-        result = this.calculate(Math.PI);
+        result = Math.PI;
         this.setState({
           displayInput: display,
-          displayResult: result,
           sideOperators: oper
         });
+        this.calculate(result);
         break;
       case "^":
         let base = newInput.slice(0, newInput.indexOf("^"));
         let exponent = newInput.slice(newInput.indexOf("^") + 1);
         display = newInput + oper;
-        result = this.calculate(Math.pow(base, exponent));
+        result = Math.pow(base, exponent);
 
         this.setState({
           displayInput: display,
-          displayResult: result,
           sideOperators: oper
         });
+        this.calculate(result);
         break;
       case "10^":
         if (newInput) {
           display = `${oper}${newInput}`;
-          result = this.calculate(Math.pow(10, newInput));
-        } else if (this.state.displayResult !== undefined) {
+          result = Math.pow(10, newInput);
+        } else {
           display = `${oper}${newInput}`;
           result = "";
         }
 
         this.setState({
           displayInput: display,
-          displayResult: result,
           sideOperators: oper
         });
+        this.calculate(result);
         break;
       case "²":
         if (newInput) {
           display = `${newInput}${oper}`;
-          result = this.calculate(Math.pow(newInput, 2));
-        } else if (this.state.displayResult !== undefined) {
+          result = Math.pow(newInput, 2);
+        } else {
           display = `${newInput}${oper}`;
           result = "";
         }
 
         this.setState({
           displayInput: display,
-          displayResult: result,
+
           sideOperators: oper
         });
+        this.calculate(result);
         break;
       case "√":
-        if (newInput >= 1) {
+        if (newInput) {
           display = `${oper}${newInput}`;
-          result = this.calculate(Math.sqrt(newInput));
-        } else if (this.state.displayResult !== undefined) {
+          result = Math.sqrt(newInput);
+        } else {
           display = `${oper}${newInput}`;
           result = "";
         }
 
         this.setState({
           displayInput: display,
-          displayResult: result,
+
           sideOperators: oper
         });
-
+        this.calculate(result);
         break;
       case "%":
         const currentValue = parseFloat(newInput);
 
         if (currentValue === 0 || newInput === "") return;
 
-        const fixedDigits = newInput.replace(/^-?\d*\.?/, "");
+        // const fixedDigits = newInput.replace(/^-?\d*\.?/, "");
         const newValue = parseFloat(newInput) / 100;
 
         this.setState({
           displayInput: (newInput + oper).toString(),
-          displayResult: String(newValue.toFixed(fixedDigits.length + 2)),
+          // displayResult: String(newValue.toFixed(fixedDigits.length + 2)),
           sideOperators: oper
         });
-
+        this.calculate(newValue);
         break;
       case "!":
         if (newInput) {
@@ -566,17 +557,14 @@ export default class Main extends Component {
         } else {
           display = newInput + oper;
         }
-        this.setState(
-          {
-            displayInput: display,
-            displayResult: result,
-            sideOperators: oper
-          },
-          function() {
-            console.log(newInput.slice(0));
-          }
-        );
+        this.setState({
+          displayInput: display,
+
+          sideOperators: oper
+        });
+        this.calculate(result);
         break;
+
       default:
         this.setState({
           displayInput: newInput ? newInput + oper : oper,
@@ -606,6 +594,13 @@ export default class Main extends Component {
       console.log(this.state.inverse);
     });
   };
+  //  adds expression and result to history state
+  addToHistory = (new_exp, result) => {
+    this.setState({
+      history: [...this.state.history, { exp: new_exp, result: result }]
+    });
+  };
+
   render() {
     return (
       <div className="calculator">
@@ -614,6 +609,7 @@ export default class Main extends Component {
           displayResult={this.state.displayResult}
           deg={this.state.deg}
         />
+
         <Keypad
           toggleOperator={this.toggleOperator}
           operatorInUse={this.operatorInUse}
