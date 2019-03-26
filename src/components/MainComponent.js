@@ -60,6 +60,7 @@ export default class Main extends Component {
       let replace = newInput
         .replace(/x/g, "*")
         .replace(/÷/g, "/")
+        .replace(/%/g, "/100")
         .replace(/e/g, "Math.E")
         .replace(/π/g, "Math.PI")
         .replace(/sin\(/g, "Math.sin(")

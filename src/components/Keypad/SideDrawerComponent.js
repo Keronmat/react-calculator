@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronRight,
+  faChevronLeft
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class SideDrawer extends Component {
@@ -31,7 +34,9 @@ export default class SideDrawer extends Component {
         style={this.state.isOpen ? { right: "0px" } : { right: "-188px" }}
       >
         <button className="drag-sym" onClick={this.SideDrawerHandler}>
-          <FontAwesomeIcon icon={faChevronRight} />
+          <FontAwesomeIcon
+            icon={this.state.isOpen ? faChevronRight : faChevronLeft}
+          />
         </button>
 
         <button
