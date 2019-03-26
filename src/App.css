@@ -8,13 +8,14 @@
 html {
   box-sizing: border-box;
 }
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans|Roboto");
 
 .App .calculator {
   height: 90vh;
   margin: 2px auto;
   border-radius: 0 0 7% 7%;
   font-family: "Roboto", sans-serif;
+  /*font-family: "Noto Sans", sans-serif;*/
   -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
   -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
   box-shadow: 0 4px 19px rgba(0, 0, 0, 0.4);
@@ -181,7 +182,7 @@ html {
   padding: 5px;
   margin: 0;
   height: 100%;
-  width: 215px;
+  width: 216px;
   position: absolute;
   right: -188px;
   transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);

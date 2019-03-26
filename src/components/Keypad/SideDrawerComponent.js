@@ -31,7 +31,7 @@ export default class SideDrawer extends Component {
     return (
       <div
         className="extra-operators"
-        style={this.state.isOpen ? { right: "0px" } : { right: "-188px" }}
+        style={this.state.isOpen ? { right: "0px" } : { right: "-189px" }}
       >
         <button className="drag-sym" onClick={this.SideDrawerHandler}>
           <FontAwesomeIcon

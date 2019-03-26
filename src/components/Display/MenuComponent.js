@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { faEllipsisV, faHistory } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 export default class Menu extends Component {
   constructor(props) {
@@ -36,20 +37,28 @@ export default class Menu extends Component {
     return (
       <div>
         <div className="menu-icon" onClick={this.handleClick}>
-          <FontAwesomeIcon icon={faEllipsisV} size="md" />
+          <FontAwesomeIcon icon={faEllipsisV} />
         </div>
         <div
           ref={node => {
             this.node = node;
           }}
-          class="dropdown-content"
+          className="dropdown-content"
           style={
             this.state.showDropDown ? { display: "block" } : { display: "none" }
           }
         >
-          <p>History</p>
-          <p>Send Feedback</p>
-          <p>Help</p>
+          <ul>
+            <li>
+              <Link to="/history">History</Link>
+            </li>
+            <li>
+              <Link to="/feedback">Send Feedback</Link>
+            </li>
+            <li>
+              <Link to="/help">Help</Link>
+            </li>
+          </ul>
         </div>
         <div className="rad-deg">
           <p>{this.props.deg ? "DEG" : "RAD"}</p>

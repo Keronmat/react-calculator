@@ -94,7 +94,7 @@ export default class Main extends Component {
     const display =
       displayInput > 0
         ? displayInput.substring(0, displayInput.length - 1)
-        : null;
+        : "";
     this.setState({
       displayInput: display
     });
@@ -309,10 +309,9 @@ export default class Main extends Component {
             ? Math.sin((newInput * Math.PI) / 180)
             : Math.sin(newInput);
         } else if (this.state.displayResult !== undefined) {
-          display = `${newInput}${oper}`;
+          display = `${oper}${newInput}`;
           result = "";
         }
-        this.calculate(result);
         this.setState({
           displayInput: display,
           sideOperators: oper
