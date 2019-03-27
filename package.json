@@ -10,9 +10,11 @@
     "jquery": "^3.3.1",
     "popper.js": "^1.14.7",
     "react": "^16.8.4",
+    "react-animation-components": "^3.0.0",
     "react-dom": "^16.8.4",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "react-transition-group": "^2.7.1"
   },
   "scripts": {
     "start": "react-scripts start",

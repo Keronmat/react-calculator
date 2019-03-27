@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FadeTransform } from "react-animation-components";
 
 export default function History(props) {
   const historyVal = props.history.map((h, i) => {
@@ -13,18 +14,25 @@ export default function History(props) {
     );
   });
   return (
-    <div className="App">
-      <div className="calculator">
-        <div className="top-pane">
-          <div className="backButton">
-            <Link to="/main">
-              <FontAwesomeIcon icon={faArrowLeft} color="var(--mainWhite)" />
-            </Link>
+    <FadeTransform
+      in
+      transformProps={{
+        exitTransform: "scale(0.5) translateY(-50%)"
+      }}
+    >
+      <div className="App">
+        <div className="calculator">
+          <div className="top-pane">
+            <div className="backButton">
+              <Link to="/main">
+                <FontAwesomeIcon icon={faArrowLeft} color="var(--mainWhite)" />
+              </Link>
+            </div>
+            <div className="title">History</div>
           </div>
-          <div className="title">History</div>
+          <div className="historySec">{historyVal}</div>
         </div>
-        <div className="historySec">{historyVal}</div>
       </div>
-    </div>
+    </FadeTransform>
   );
 }

@@ -5,7 +5,7 @@ const NumberPad = props => {
     <React.Fragment>
       <button
         className="ripple-numpad"
-        name={0}
+        value={0}
         onClick={e => props.handleClick(0)}
       >
         0
@@ -18,28 +18,28 @@ const NumberPad = props => {
       </button>
       <button
         className="ripple-numpad"
-        name={1}
+        value={1}
         onClick={e => props.handleClick(1)}
       >
         1
       </button>
       <button
         className="ripple-numpad"
-        name={2}
+        value={2}
         onClick={e => props.handleClick(2)}
       >
         2
       </button>
       <button
         className="ripple-numpad"
-        name={3}
+        value={3}
         onClick={e => props.handleClick(3)}
       >
         3
       </button>
       <button
         className="ripple-numpad"
-        name={4}
+        value={4}
         onClick={e => props.handleClick(4)}
       >
         4
@@ -53,28 +53,28 @@ const NumberPad = props => {
       </button>
       <button
         className="ripple-numpad"
-        name={6}
+        value={6}
         onClick={e => props.handleClick(6)}
       >
         6
       </button>
       <button
         className="ripple-numpad"
-        name={7}
+        value={7}
         onClick={e => props.handleClick(7)}
       >
         7
       </button>
       <button
         className="ripple-numpad"
-        name={8}
+        value={8}
         onClick={e => props.handleClick(8)}
       >
         8
       </button>
       <button
         className="ripple-numpad"
-        name={9}
+        value={9}
         onClick={e => props.handleClick(9)}
       >
         9

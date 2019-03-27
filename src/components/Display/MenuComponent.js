@@ -37,8 +37,8 @@ export default class Menu extends Component {
               </Link>
             </li>
             <li>
-              <Link style={linkStyle} to="/feedback">
-                Send Feedback
+              <Link style={linkStyle} to="/settings">
+                Settings
               </Link>
             </li>
             <li>

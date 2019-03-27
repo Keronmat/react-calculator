@@ -4,7 +4,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FadeTransform } from "react-animation-components";
 
-export default function Help(props) {
+export default function Settings(props) {
   return (
     <FadeTransform
       in
@@ -20,9 +20,9 @@ export default function Help(props) {
                 <FontAwesomeIcon icon={faArrowLeft} color="var(--mainWhite)" />
               </Link>
             </div>
-            <div className="title">Help</div>
+            <div className="title">Settings</div>
           </div>
-          <div className="helpSec" />
+          <div className="feedback-sec" />
         </div>
       </div>
     </FadeTransform>

@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import Main from "./MainComponent";
 import History from "./HistoryComponent";
 import Help from "./HelpComponent";
-import SendFeedBack from "./SendFeedBackComponent";
+import Settings from "./SettingsComponent";
 import { Switch, Route, Redirect } from "react-router-dom";
 import ErrorBoundary from "../ErrorBoundaryComponent";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 export default class Calculator extends Component {
   constructor(props) {
@@ -20,6 +21,42 @@ export default class Calculator extends Component {
       inverse: false,
       history: []
     };
+  }
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKey);
+  }
+
+  // logic for binding keypresses with buttons
+  handleKey = event => {
+    let numArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    let { key } = event;
+
+    if (key === "Enter") key = this.calculate(this.state.displayInput);
+
+    if (numArr.includes(key)) {
+      event.preventDefault();
+      this.handleClick(key);
+    } else if (key === ".") {
+      event.preventDefault();
+      this.handleDot();
+    } else if (key === "Backspace") {
+      event.preventDefault();
+      this.handleBackSpace();
+    } else if (key === "Clear") {
+      event.preventDefault();
+      this.handleClear();
+    } else if (["*", "/", "+", "-"].includes(key)) {
+      event.preventDefault();
+      //this.handleClick(key);
+      this.toggleOperator(key);
+      this.calculate(this.state.displayInput);
+    } else if (["^", "(", ")", "%"].includes(key)) {
+      event.preventDefault();
+      this.handleSideDrawerKeys(key);
+    }
+  };
+  componentWillUnmount() {
+    document.addEventListener("keydown", this.handleKey);
   }
 
   calculate = input => {
@@ -624,61 +661,65 @@ export default class Calculator extends Component {
   };
   render() {
     return (
-      <Switch>
-        <Route
-          exact
-          path="/main"
-          component={() => (
-            <ErrorBoundary>
-              <Main
-                displayInput={this.state.displayInput}
-                displayResult={this.state.displayResult}
-                deg={this.state.deg}
-                history={this.state.history}
-                toggleOperator={this.toggleOperator}
-                operatorInUse={this.operatorInUse}
-                handleClick={this.handleClick}
-                handleBackSpace={this.handleBackSpace}
-                handleClear={this.handleClear}
-                handleDot={this.handleDot}
-                handleSideDrawerKeys={this.handleSideDrawerKeys}
-                handleRadorDeg={this.handleRadorDeg}
-                inverse={this.state.inverse}
-                toggleInverse={this.toggleInverse}
-                sideDrawerOpen={this.state.sideDrawerOpen}
-                toggleSideDrawer={this.toggleSideDrawer}
-              />
-            </ErrorBoundary>
-          )}
-        />
+      <TransitionGroup>
+        <CSSTransition classNames="page" timeout={300}>
+          <Switch>
+            <Route
+              exact
+              path="/main"
+              component={() => (
+                <ErrorBoundary>
+                  <Main
+                    displayInput={this.state.displayInput}
+                    displayResult={this.state.displayResult}
+                    deg={this.state.deg}
+                    history={this.state.history}
+                    toggleOperator={this.toggleOperator}
+                    operatorInUse={this.operatorInUse}
+                    handleClick={this.handleClick}
+                    handleBackSpace={this.handleBackSpace}
+                    handleClear={this.handleClear}
+                    handleDot={this.handleDot}
+                    handleSideDrawerKeys={this.handleSideDrawerKeys}
+                    handleRadorDeg={this.handleRadorDeg}
+                    inverse={this.state.inverse}
+                    toggleInverse={this.toggleInverse}
+                    sideDrawerOpen={this.state.sideDrawerOpen}
+                    toggleSideDrawer={this.toggleSideDrawer}
+                  />
+                </ErrorBoundary>
+              )}
+            />
 
-        <Route
-          path="/history"
-          component={() => (
-            <ErrorBoundary>
-              <History history={this.state.history} />
-            </ErrorBoundary>
-          )}
-        />
-        <Route
-          path="/help"
-          component={() => (
-            <ErrorBoundary>
-              <Help />
-            </ErrorBoundary>
-          )}
-        />
+            <Route
+              path="/history"
+              component={() => (
+                <ErrorBoundary>
+                  <History history={this.state.history} />
+                </ErrorBoundary>
+              )}
+            />
+            <Route
+              path="/help"
+              component={() => (
+                <ErrorBoundary>
+                  <Help />
+                </ErrorBoundary>
+              )}
+            />
 
-        <Route
-          path="/feedback"
-          component={() => (
-            <ErrorBoundary>
-              <SendFeedBack />
-            </ErrorBoundary>
-          )}
-        />
-        <Redirect to="/main" />
-      </Switch>
+            <Route
+              path="/settings"
+              component={() => (
+                <ErrorBoundary>
+                  <Settings />
+                </ErrorBoundary>
+              )}
+            />
+            <Redirect to="/main" />
+          </Switch>
+        </CSSTransition>
+      </TransitionGroup>
     );
   }
 }
