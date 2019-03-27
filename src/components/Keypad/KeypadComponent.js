@@ -7,14 +7,14 @@ export default function Keypad(props) {
   return (
     <div className="calculator-keypad col-sm-12">
       <div className="pad row">
-        <div className="number-pad col-9">
+        <div className="number-pad col-8">
           <NumberPad
             handleClick={props.handleClick}
             handleEqualSign={props.handleEqualSign}
             handleDot={props.handleDot}
           />
         </div>
-        <div className="operators col-2">
+        <div className="operators col-3">
           <MainOperators
             handleClick={props.handleClick}
             handleBackSpace={props.handleBackSpace}
@@ -31,6 +31,8 @@ export default function Keypad(props) {
             deg={props.deg}
             inverse={props.inverse}
             toggleInverse={props.toggleInverse}
+            sideDrawerOpen={props.sideDrawerOpen}
+            toggleSideDrawer={props.toggleSideDrawer}
           />
         </React.Fragment>
       </div>

@@ -11,38 +11,20 @@ export default class Menu extends Component {
       showDropDown: false
     };
   }
-  handleClick = () => {
-    if (!this.state.showDropDown) {
-      // attach/remove event handler
-      document.addEventListener("click", this.handleOutsideClick, false);
-    } else {
-      document.removeEventListener("click", this.handleOutsideClick, false);
-    }
-
-    this.setState(prevState => ({
-      showDropDown: !prevState.showDropDown
+  handleClickMenu = () => {
+    this.setState(() => ({
+      showDropDown: !this.state.showDropDown
     }));
   };
 
-  handleOutsideClick = e => {
-    // ignore clicks on the component itself
-    if (this.node.contains(e.target)) {
-      return;
-    }
-
-    this.handleClick();
-  };
-
   render() {
+    const linkStyle = { textDecoration: "none", color: "var(--mdBlue)" };
     return (
       <div>
-        <div className="menu-icon" onClick={this.handleClick}>
+        <div className="menu-icon" onClick={this.handleClickMenu}>
           <FontAwesomeIcon icon={faEllipsisV} />
         </div>
         <div
-          ref={node => {
-            this.node = node;
-          }}
           className="dropdown-content"
           style={
             this.state.showDropDown ? { display: "block" } : { display: "none" }
@@ -50,13 +32,19 @@ export default class Menu extends Component {
         >
           <ul>
             <li>
-              <Link to="/history">History</Link>
+              <Link style={linkStyle} to="/history">
+                History
+              </Link>
             </li>
             <li>
-              <Link to="/feedback">Send Feedback</Link>
+              <Link style={linkStyle} to="/feedback">
+                Send Feedback
+              </Link>
             </li>
             <li>
-              <Link to="/help">Help</Link>
+              <Link style={linkStyle} to="/help">
+                Help
+              </Link>
             </li>
           </ul>
         </div>
