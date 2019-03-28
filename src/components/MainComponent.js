@@ -9,6 +9,7 @@ export default function Main(props) {
         displayInput={props.displayInput}
         displayResult={props.displayResult}
         deg={props.deg}
+        theme={props.theme}
       />
 
       <Keypad
@@ -25,6 +26,7 @@ export default function Main(props) {
         toggleInverse={props.toggleInverse}
         sideDrawerOpen={props.sideDrawerOpen}
         toggleSideDrawer={props.toggleSideDrawer}
+        theme={props.theme}
       />
     </div>
   );

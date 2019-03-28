@@ -5,6 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FadeTransform } from "react-animation-components";
 
 export default function Help(props) {
+  const googleStyle = {
+    backgroundColor: "var(--gBlue)",
+    color: "var(--gaWhite)"
+  };
+  const androidStyle = {
+    backgroundColor: "var(--aGreen",
+    color: "var(--gaWhite)"
+  };
   return (
     <FadeTransform
       in
@@ -14,7 +22,16 @@ export default function Help(props) {
     >
       <div className="App">
         <div className="calculator">
-          <div className="top-pane">
+          <div
+            style={
+              props.theme === "google-theme"
+                ? googleStyle
+                : props.theme === "android"
+                ? androidStyle
+                : null
+            }
+            className="top-pane"
+          >
             <div className="backButton">
               <Link to="/main">
                 <FontAwesomeIcon icon={faArrowLeft} color="var(--mainWhite)" />

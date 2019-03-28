@@ -19,12 +19,19 @@ export default class Calculator extends Component {
       sideDrawerOpen: false,
       deg: false,
       inverse: false,
+      theme: "original",
       history: []
     };
   }
   componentDidMount() {
     document.addEventListener("keydown", this.handleKey);
   }
+
+  handleTheme = event => {
+    this.setState({ theme: event.target.value }, function() {
+      console.log(this.state.theme);
+    });
+  };
 
   // logic for binding keypresses with buttons
   handleKey = event => {
@@ -686,6 +693,7 @@ export default class Calculator extends Component {
                     toggleInverse={this.toggleInverse}
                     sideDrawerOpen={this.state.sideDrawerOpen}
                     toggleSideDrawer={this.toggleSideDrawer}
+                    theme={this.state.theme}
                   />
                 </ErrorBoundary>
               )}
@@ -695,7 +703,10 @@ export default class Calculator extends Component {
               path="/history"
               component={() => (
                 <ErrorBoundary>
-                  <History history={this.state.history} />
+                  <History
+                    history={this.state.history}
+                    theme={this.state.theme}
+                  />
                 </ErrorBoundary>
               )}
             />
@@ -703,7 +714,7 @@ export default class Calculator extends Component {
               path="/help"
               component={() => (
                 <ErrorBoundary>
-                  <Help />
+                  <Help theme={this.state.theme} />
                 </ErrorBoundary>
               )}
             />
@@ -712,7 +723,10 @@ export default class Calculator extends Component {
               path="/settings"
               component={() => (
                 <ErrorBoundary>
-                  <Settings />
+                  <Settings
+                    theme={this.state.theme}
+                    handleTheme={this.handleTheme}
+                  />
                 </ErrorBoundary>
               )}
             />
