@@ -2,11 +2,11 @@
 
 This is intended to be a clone of the google calculator. The application is built using the JavaScript library React JS. The application still has a few bugs when using scientific functions.
 
-![alt text](https://raw.githubusercontent.com/keronmat/react-calculator/master/img/google-theme-1.png)
-![alt text](https://raw.githubusercontent.com/keronmat/react-calculator/master/img/history-android-theme.png)
-![alt text](https://raw.githubusercontent.com/keronmat/react-calculator/master/img/orginal-theme.png)
-![alt text](https://raw.githubusercontent.com/keronmat/react-calculator/master/img/settings-google-theme.png)
-![alt text](https://raw.githubusercontent.com/keronmat/react-calculator/master/img/help-sec-original-theme.png)
+![Google Theme](https://github.com/Keronmat/react-calculator/blob/master/img/google-theme-1.PNG?raw=true)
+![Android Theme - Side Panel Open](https://github.com/Keronmat/react-calculator/blob/master/img/android-theme.PNG?raw=true)
+![Android Theme - History Section](https://github.com/Keronmat/react-calculator/blob/master/img/history-android-theme.PNG?raw=true)
+![Original Theme - Help Section](https://github.com/Keronmat/react-calculator/blob/master/img/help-sec-original-theme.PNG?raw=true)
+![Google Theme - Setting Section](https://github.com/Keronmat/react-calculator/blob/master/img/settings-google-theme.PNG?raw=true)
 
 ###### Features - mostly same as google calculator
 
