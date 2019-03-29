@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Calculator
 
-## Available Scripts
+This is intended to be a clone of the google calculator. The application is built using the JavaScript library React JS. The application still has a few bugs when using scientific functions.
 
-In the project directory, you can run:
+![alt text](https://raw.githubusercontent.com/keronmat/react-calculator/master/img/google-theme-1.png)
+![alt text](https://raw.githubusercontent.com/keronmat/react-calculator/master/img/history-android-theme.png)
+![alt text](https://raw.githubusercontent.com/keronmat/react-calculator/master/img/orginal-theme.png)
+![alt text](https://raw.githubusercontent.com/keronmat/react-calculator/master/img/settings-google-theme.png)
+![alt text](https://raw.githubusercontent.com/keronmat/react-calculator/master/img/help-sec-original-theme.png)
 
-### `npm start`
+###### Features - mostly same as google calculator
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- You can tap the right corner and view the history of your calculations.
+- You can change between three different themes. I switch the feedback section to this.
+- Scientific calculator included.
+- Yoy can tap the inverse button to get more scientific functions.
+- You can toggle between Radians and degrees.
+- Help Section.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+###### What I've learnt
 
-### `npm test`
+- React life cycles.
+- Diferences between state and props.
+- Moving properties through the DOM tree other other components.
+- Adding classes and css styles dynamically.
+- Maintaining clean code by seprating UI components from logical components.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- using cross-fetch to fetch data from json-server (had to return to original code since github shouldn't be used for this reason)
 
-### `npm run build`
+###### What is let to be done
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Use redux to manage react state or context Api.
+- Incorporate redux-thunk, redux-logger and middlerware in to react and redux.
+- Test for bugs and fix.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`git clone`
+`cd react-calculator`
+`npm install yarn / npm start`
 
-### `npm run eject`
+## Contributing
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Pull requests are welcome. Please open an issue first to discuss what you would like to change.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Please make sure to update tests as appropriate.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Author
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+###### Keron Matthews

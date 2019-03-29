@@ -169,7 +169,7 @@ export default class Calculator extends Component {
   //toggle Operator
 
   toggleOperator = newOperator => {
-    const { displayInput, operatorInUse, sideOperators } = this.state;
+    const { displayInput, operatorInUse } = this.state;
     //const lastOper = displayInput.charAt(displayInput.length - 1);
     const prevOp = operatorInUse;
     const prevDisplay = displayInput;

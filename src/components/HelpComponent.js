@@ -39,7 +39,16 @@ export default function Help(props) {
             </div>
             <div className="title">Help</div>
           </div>
-          <div className="helpSec" />
+          <div className="helpSec">
+            <ul>
+              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+              <li>Aenean eget sem quis augue mattis cursus eu ac quam.</li>
+              <li>Integer sit amet sapien non ipsum imperdiet lobortis.</li>
+              <li>Nunc ac quam at neque pellentesque euismod.</li>
+              <li>Mauris vel tortor varius, porta nunc id, iaculis enim.</li>
+              <li>Mauris finibus ipsum at pharetra faucibus.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </FadeTransform>

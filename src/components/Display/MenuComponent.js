@@ -11,10 +11,26 @@ export default class Menu extends Component {
       showDropDown: false
     };
   }
-  handleClickMenu = () => {
-    this.setState(() => ({
-      showDropDown: !this.state.showDropDown
+
+  handleClick = () => {
+    // attach/remove event handler
+    if (!this.state.showDropDown) {
+      document.addEventListener("click", this.handleOutsideClick, false);
+    } else {
+      document.removeEventListener("click", this.handleOutsideClick, false);
+    }
+    this.setState(prevState => ({
+      showDropDown: !prevState.showDropDown
     }));
+  };
+
+  handleOutsideClick = e => {
+    // ignore clicks on the component itself
+    if (this.node.contains(e.target)) {
+      return;
+    }
+
+    this.handleClick();
   };
 
   render() {
@@ -44,7 +60,13 @@ export default class Menu extends Component {
     const linkStyle = { textDecoration: "none", color: fontColor };
     return (
       <div>
-        <div className="menu-icon" onClick={this.handleClickMenu}>
+        <div
+          ref={node => {
+            this.node = node;
+          }}
+          className="menu-icon"
+          onClick={this.handleClick}
+        >
           <FontAwesomeIcon icon={faEllipsisV} color={IconColor} />
         </div>
         <div
